@@ -1,6 +1,13 @@
 # bbc_news
 
-A new Flutter project.
+Flutter Project UAS - Praktikum Pemrograman Mobile
+
+Aplikasi Mobile dengan Tema Berita
+
+Anggota Kelompok:
+- Muhammad Adhitya 2206032
+- Ilham Maulana Hasan 2206020
+- Naufal Sirojudin 2206004
 
 ## Getting Started
 
