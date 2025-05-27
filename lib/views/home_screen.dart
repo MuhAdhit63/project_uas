@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'profil_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -7,7 +8,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
@@ -15,8 +17,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
-    _fadeAnimation = CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    );
     _animationController.forward();
   }
 
@@ -37,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     final List<Widget> _pages = [
       buildHomeScreen(),
       const Placeholder(),
-      const Placeholder(),
+      const ProfileScreen(),
     ];
 
     return Scaffold(
@@ -107,9 +115,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                             prefixIcon: const Icon(Icons.search),
                             filled: true,
                             fillColor: Colors.white,
-                            contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -139,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     color: Colors.black12,
                     blurRadius: 4,
                     offset: Offset(0, 2),
-                  )
+                  ),
                 ],
               ),
               child: Row(
@@ -157,49 +167,92 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(Icons.sports_baseball, size: 48.0,),
-                Icon(Icons.group, size: 48.0,),
-                Icon(Icons.group, size: 48.0,),
-                Icon(Icons.group, size: 48.0,),
-                Icon(Icons.grid_view, size: 48.0,),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.sports_baseball, size: 48.0),
+                    Text('sports'),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.account_balance, size: 48.0),
+                    Text('politic'),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Icon(Icons.star, size: 48.0), Text('selebriti')],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Icon(Icons.gavel, size: 48.0), Text('criminal')],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Icon(Icons.grid_view, size: 48.0), Text('Menu')],
+                ),
               ],
             ),
+
             const SizedBox(height: 8),
             const Align(
               alignment: Alignment.centerRight,
-              child: Text('see more >>', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(
+                'see more >>',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(height: 12),
-            articleCard('Pasokan Energi Lancar, Posko Nasional Sektor ESDM 2025 Resmi Ditutup'),
-            articleCard('Pemerintah Umumkan Kebijakan Baru di Sektor Pendidikan'),
-            articleCard('Indonesia Raih Medali Emas di Olimpiade 2025'),
-            articleCard('Festival Film Nasional 2025 Resmi Dibuka di Jakarta'),
-            articleCard('Partai Politik Mulai Siapkan Strategi untuk Pemilu 2029'),
+            articleCard(
+              'Pasokan Energi Lancar, Posko Nasional Sektor ESDM 2025 Resmi Ditutup',
+              'assets/images/download.jpg',
+            ),
+            articleCard(
+              'Pemerintah Umumkan Kebijakan Baru di Sektor Pendidikan',
+              'assets/images/liburan.jpg',
+            ),
+            articleCard(
+              'Indonesia Raih Medali Emas di Olimpiade 2025',
+              'assets/images/emas.jpg',
+            ),
+            articleCard(
+              'Festival Film Nasional 2025 Resmi Dibuka di Jakarta',
+              'assets/images/film.jpg',
+            ),
+            articleCard(
+              'Partai Politik Mulai Siapkan Strategi untuk Pemilu 2029',
+              'assets/images/partai.jpg',
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget articleCard(String title) {
+  Widget articleCard(String title, String imagePath) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.orange,
-              borderRadius: BorderRadius.circular(12),
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+            child: Image.asset(
+              imagePath,
+              height: 150,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
-            height: 150,
-            width: double.infinity,
           ),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(12),
+              ),
               boxShadow: const [
                 BoxShadow(color: Colors.black12, blurRadius: 4),
               ],
@@ -221,16 +274,15 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       decoration: BoxDecoration(
         color: Colors.yellow[200],
         borderRadius: BorderRadius.circular(12),
-        boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 4),
-        ],
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4)],
       ),
-      child: assetPath != null
-          ? ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(assetPath, fit: BoxFit.cover),
-            )
-          : const SizedBox.shrink(),
+      child:
+          assetPath != null
+              ? ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(assetPath, fit: BoxFit.cover),
+              )
+              : const SizedBox.shrink(),
     );
   }
 }
